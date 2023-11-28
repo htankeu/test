@@ -1,9 +1,12 @@
+import 'package:bookmytime/customs/custom_scaffold.dart';
+import 'package:bookmytime/customs/custom_text_field.dart';
+import 'package:bookmytime/customs/reusable_widgets.dart';
 import 'package:bookmytime/services/auth_services.dart';
 import 'package:bookmytime/tools/pallete.dart';
+import 'package:bookmytime/validations/validations.dart';
 import 'package:bookmytime/widgets/gradient_button.dart';
-import 'package:bookmytime/widgets/input_field.dart';
 import 'package:bookmytime/widgets/linkText.dart';
-import 'package:bookmytime/widgets/social_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +22,12 @@ class SingUpScreen extends StatefulWidget {
 }
 
 class _registerPageState extends State<SingUpScreen> {
+  bool obscureText = true;
+  bool isEmailValid = false;
+  bool isNameValid = false;
+  bool isPasswordValid = false;
+  bool isConfirmPasswordValid = false;
+
   // text controllers
   final emailController = TextEditingController();
   final usernameController = TextEditingController();
@@ -53,120 +62,243 @@ class _registerPageState extends State<SingUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-            child: Center(
-          child: Column(children: [
-            Image.asset(
-              'assets/images/logo.png',
-              height: 90,
-            ),
-            const Text(
-              'Sing Up',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: Pallete.blackColor),
-            ),
+    return CustomScaffold(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             const SizedBox(
-              height: 25,
+              height: 5,
             ),
-            SocialButton(
-              iconPath: 'assets/svgs/icons8-google.svg',
-              label: 'Continue with Google',
-              onPressed: () {},
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            SocialButton(
-              iconPath: 'assets/svgs/icons8-facebook.svg',
-              label: 'Continue with Facebook',
-              horizontalPadding: 93,
-              onPressed: () {},
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const Text(
-              'or',
-              style: TextStyle(
-                fontSize: 17,
+            const Center(
+              child: Text(
+                'Sign Up',
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Pallete.kWhiteColor,
+                    fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(
-              height: 15,
+              height: 8,
             ),
-            InputField(
-              textController: usernameController,
-              hinText: 'Username',
-              hintextColor: Pallete.blackColorfloat,
-              iconName: Icons.people_alt,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            InputField(
-              textController: emailController,
-              hinText: 'Email',
-              hintextColor: Pallete.blackColorfloat,
-              iconName: Icons.mail_rounded,
+            RichText(
+              text: const TextSpan(
+                  style: TextStyle(fontSize: 15, color: Pallete.kWhiteColor),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'BookMyTime: ',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(text: 'account'),
+                  ]),
             ),
             const SizedBox(
-              height: 15,
+              height: 7,
             ),
-            InputField(
-              textController: passwordController,
-              hinText: 'Password',
-              hintextColor: Pallete.blackColorfloat,
-              iconName: Icons.lock,
-              obscureText: true,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            InputField(
-              textController: confirmPasswordController,
-              hinText: 'Confirm password',
-              hintextColor: Pallete.blackColorfloat,
-              iconName: Icons.password,
-              suffixIconName: Icons.remove_red_eye_sharp,
-              obscureText: true,
+            const Text(
+              "Full name",
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Pallete.kWhiteColor,
+                  fontWeight: FontWeight.bold),
             ),
             const SizedBox(
-              height: 15,
+              height: 7,
             ),
-            GradientButton(
-              text: 'Sing Up',
-              buttonWidth: 240,
-              buttonHeight: 60,
-              action: signUp,
+            CustomTextField(
+              hinText: "Full Name",
+              controller: usernameController,
+              suffix: verificationWidget(
+                  color: isNameValid
+                      ? Pallete.kGreenColor
+                      : const Color.fromARGB(255, 104, 103, 103)),
+              isValid: isNameValid,
+              onChange: (v) {
+                setState(() {
+                  if (Validations.commonValidation(usernameController.text)) {
+                    isNameValid = true;
+                  } else {
+                    isNameValid = false;
+                  }
+                });
+              },
             ),
             const SizedBox(
-              height: 15,
+              height: 7,
+            ),
+            const Text(
+              "Email",
+              style: TextStyle(
+                fontSize: 15,
+                color: Pallete.kWhiteColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(
+              height: 7,
+            ),
+            CustomTextField(
+                hinText: "email",
+                controller: emailController,
+                isValid: isEmailValid,
+                suffix: verificationWidget(
+                    color: isEmailValid
+                        ? Pallete.kGreenColor
+                        : const Color.fromARGB(255, 104, 103, 103)),
+                onChange: (v) {
+                  setState(() {
+                    if (Validations.emailValidationWidthDomain(
+                        emailController.text)) {
+                      isEmailValid = true;
+                    } else {
+                      isEmailValid = false;
+                    }
+                  });
+                }),
+            const SizedBox(
+              height: 7,
+            ),
+            const Text(
+              "Password",
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Pallete.kWhiteColor,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 7,
+            ),
+            CustomTextField(
+                hinText: "Password",
+                controller: passwordController,
+                isValid: isPasswordValid,
+                suffix: CupertinoButton(
+                    minSize: 0,
+                    padding: EdgeInsets.zero,
+                    child: obscureText
+                        ? const Icon(
+                            Icons.visibility_off_outlined,
+                            color: Pallete.kWhiteColor,
+                          )
+                        : const Icon(Icons.visibility_outlined),
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    }),
+                onChange: (v) {
+                  setState(() {
+                    if (Validations.commonValidation(passwordController.text)) {
+                      isPasswordValid = true;
+                    } else {
+                      isPasswordValid = false;
+                    }
+                  });
+                }),
+            const SizedBox(
+              height: 7,
+            ),
+            const Text(
+              "Confirm Password",
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Pallete.kWhiteColor,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 7,
+            ),
+            CustomTextField(
+                hinText: "Confirm Password",
+                controller: confirmPasswordController,
+                isValid: isConfirmPasswordValid,
+                suffix: CupertinoButton(
+                    minSize: 0,
+                    padding: EdgeInsets.zero,
+                    child: obscureText
+                        ? const Icon(
+                            Icons.visibility_off_outlined,
+                            color: Pallete.kWhiteColor,
+                          )
+                        : const Icon(Icons.visibility_outlined),
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    }),
+                onChange: (v) {
+                  setState(() {
+                    if (Validations.commonValidation(
+                        confirmPasswordController.text)) {
+                      isConfirmPasswordValid = true;
+                    } else {
+                      isConfirmPasswordValid = false;
+                    }
+                  });
+                }),
+            const SizedBox(
+              height: 7,
+            ),
+            // const Text(
+            //   'Password must be at least 6 characters',
+            //   style: TextStyle(
+            //       fontSize: 16,
+            //       color: Pallete.kWhiteColor,
+            //       fontWeight: FontWeight.bold),
+            // ),
+            const SizedBox(
+              height: 7,
+            ),
+            Center(
+              child: GradientButton(
+                text: 'Sign Up',
+                buttonHeight: 40,
+                buttonWidth: 190,
+                action: signUp,
+              ),
+            ),
+            const SizedBox(
+              height: 7,
+            ),
+            const Center(
+              child: Text(
+                'Or connect with',
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Pallete.kWhiteColor,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(
+              height: 7,
+            ),
+            socialWidget(),
+            const SizedBox(
+              height: 7,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 8, right: 5),
-                  child: Text(
-                    "Already have a Account?",
-                    style: TextStyle(color: Pallete.blackColor),
+                const Text(
+                  'Already have an account?',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Pallete.kWhiteColor
                   ),
                 ),
+
+                const SizedBox(width: 10,),
                 GestureDetector(
-                  onTap: widget.onClick ,
-                  child: const LinkText(outputText: 'Sing in here!'),
-                ),
+                  onTap: widget.onClick,
+                  child: const LinkText(outputText: 'Log in'),
+                )
               ],
             ),
-            const SizedBox(
-              height: 12,
-            )
-          ]),
-        )),
+            const SizedBox(height: 12,),
+          ],
+        ),
       ),
     );
   }

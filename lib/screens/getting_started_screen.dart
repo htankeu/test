@@ -22,7 +22,9 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/bgGetting.jpeg"),
+          image: AssetImage(
+            "assets/images/bgGettingStarted.jpg",
+          ),
         ),
       ),
       child: Padding(
@@ -38,21 +40,21 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
             const Text(
               'Welcome',
               style: TextStyle(
-                  fontSize: 40,
+                  fontSize: 30,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             ),
             const Text(
               'To',
               style: TextStyle(
-                  fontSize: 40,
+                  fontSize: 30,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             ),
             Text(
               'BooMyTime',
               style: GoogleFonts.redressed(
-                  fontSize: 50,
+                  fontSize: 40,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.italic),
@@ -64,6 +66,9 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
               text: 'Getting Started',
               buttonHeight: 20,
               buttonWidth: MediaQuery.of(context).size.width * 0.5,
+              firstColor: Pallete.gradient2,
+              secondColor: Pallete.gradient2,
+              thirdColor: Pallete.gradient2,
               action: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const AuthGate()));

@@ -68,8 +68,8 @@ flutter:
   assets:
     - assets/images/log.png
     - assets/images/logo.png
+    - assets/images/bgimage.png
     - assets/images/bgGettingStarted.jpg
-    - assets/images/bgGetting.jpeg
     - assets/images/app.png
     - assets/images/phone_with.png
     - assets/images/phone_with2.jpg
@@ -88,6 +88,10 @@ flutter:
     - assets/svgs/lock-solid.svg
     - assets/svgs/user-solid.svg
     - assets/svgs/envelope-solid.svg
+    - assets/icons/apple.png
+    - assets/icons/check.png
+    - assets/icons/facebook.png
+    - assets/icons/google.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

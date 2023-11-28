@@ -5,12 +5,20 @@ class GradientButton extends StatelessWidget{
   final String text;
   final double buttonHeight;
   final double buttonWidth;
+  final Color firstColor;
+  final Color secondColor;
+  final Color thirdColor;
+  final Color textColor;
   final void Function()? action;
   const GradientButton({
     Key? key,
     required this.text,
     required this.buttonHeight,
     required this.buttonWidth,
+    this.firstColor = Pallete.gradient1Blue,
+    this.secondColor = Pallete.gradient2,
+    this.thirdColor = Pallete.gradient3,
+    this.textColor = Pallete.whiteColor,
     this.action,
     }): super(key: key);
 
@@ -18,11 +26,11 @@ class GradientButton extends StatelessWidget{
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           colors: [
-            Pallete.gradient1Blue,
-            Pallete.gradient2,
-            Pallete.gradient3
+            firstColor,
+            secondColor,
+            thirdColor,
           ],
           begin: Alignment.bottomLeft,
           end: Alignment.topRight
@@ -38,9 +46,10 @@ class GradientButton extends StatelessWidget{
       ), 
       child: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: 17,
+          color: textColor,
         ),
       )),
     );

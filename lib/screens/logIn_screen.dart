@@ -1,65 +1,35 @@
 import 'package:bookmytime/customs/custom_scaffold.dart';
 import 'package:bookmytime/customs/custom_text_field.dart';
 import 'package:bookmytime/customs/reusable_widgets.dart';
-import 'package:bookmytime/services/auth_services.dart';
 import 'package:bookmytime/tools/pallete.dart';
 import 'package:bookmytime/validations/validations.dart';
 import 'package:bookmytime/widgets/gradient_button.dart';
 import 'package:bookmytime/widgets/linkText.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class SingUpScreen extends StatefulWidget {
+class LogInScreen extends StatefulWidget {
   final void Function()? onClick;
-  const SingUpScreen({
+  const LogInScreen({
     Key? key,
     this.onClick,
   }) : super(key: key);
 
   @override
-  State<SingUpScreen> createState() => _registerPageState();
+  _LogInScreenState createState() => _LogInScreenState();
 }
 
-class _registerPageState extends State<SingUpScreen> {
+class _LogInScreenState extends State<LogInScreen> {
   bool obscureText = true;
-  bool obscureTextConfirm = true;
   bool isEmailValid = false;
-  bool isNameValid = false;
   bool isPasswordValid = false;
-  bool isConfirmPasswordValid = false;
 
   // text controllers
   final emailController = TextEditingController();
-  final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
 
-// singUp User
-  void signUp() async {
-    if (passwordController.text != confirmPasswordController.text) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Passwords do not match!"),
-        ),
-      );
-      return;
-    }
-
-    // get auth service
-    final authService = Provider.of<AuthServices>(context, listen: false);
-
-    try {
-      await authService.signUpWithEmailandPassword(
-          emailController.text, passwordController.text);
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.toString()),
-        ),
-      );
-    }
-  }
+  // function to signIn
+  void signIn() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +44,7 @@ class _registerPageState extends State<SingUpScreen> {
             ),
             const Center(
               child: Text(
-                'Sign Up',
+                'Sign In',
                 style: TextStyle(
                     fontSize: 25,
                     color: Pallete.kWhiteColor,
@@ -88,7 +58,7 @@ class _registerPageState extends State<SingUpScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Already have an account?',
+                  'Are you new? Please register you',
                   style: TextStyle(fontSize: 10, color: Pallete.kWhiteColor),
                 ),
                 const SizedBox(
@@ -97,42 +67,11 @@ class _registerPageState extends State<SingUpScreen> {
                 GestureDetector(
                   onTap: widget.onClick,
                   child: const LinkText(
-                    outputText: 'Log in',
+                    outputText: 'Sign Up',
                     textColor: Pallete.gradient3,
                   ),
                 )
               ],
-            ),
-            const SizedBox(
-              height: 7,
-            ),
-            const Text(
-              "Full name",
-              style: TextStyle(
-                  fontSize: 15,
-                  color: Pallete.kWhiteColor,
-                  fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 7,
-            ),
-            CustomTextField(
-              hinText: "Full Name",
-              controller: usernameController,
-              suffix: verificationWidget(
-                  color: isNameValid
-                      ? Pallete.kGreenColor
-                      : const Color.fromARGB(255, 104, 103, 103)),
-              isValid: isNameValid,
-              onChange: (v) {
-                setState(() {
-                  if (Validations.commonValidation(usernameController.text)) {
-                    isNameValid = true;
-                  } else {
-                    isNameValid = false;
-                  }
-                });
-              },
             ),
             const SizedBox(
               height: 7,
@@ -182,8 +121,8 @@ class _registerPageState extends State<SingUpScreen> {
             CustomTextField(
                 hinText: "Password",
                 controller: passwordController,
-                isValid: isPasswordValid,
                 obscureText: obscureText,
+                isValid: isPasswordValid,
                 suffix: CupertinoButton(
                     minSize: 0,
                     padding: EdgeInsets.zero,
@@ -210,64 +149,25 @@ class _registerPageState extends State<SingUpScreen> {
             const SizedBox(
               height: 7,
             ),
+            const SizedBox(
+              height: 7,
+            ),
             const Text(
-              "Confirm Password",
+              'Password must be at least 6 characters',
               style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 16,
                   color: Pallete.kWhiteColor,
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 7,
             ),
-            CustomTextField(
-                hinText: "Confirm Password",
-                controller: confirmPasswordController,
-                obscureText: obscureTextConfirm,
-                isValid: isConfirmPasswordValid,
-                suffix: CupertinoButton(
-                    minSize: 0,
-                    padding: EdgeInsets.zero,
-                    child: obscureTextConfirm
-                        ? const Icon(
-                            Icons.visibility_off_outlined,
-                            color: Pallete.kWhiteColor,
-                          )
-                        : const Icon(Icons.visibility_outlined),
-                    onPressed: () {
-                      setState(() {
-                        obscureTextConfirm = !obscureTextConfirm;
-                      });
-                    }),
-                onChange: (v) {
-                  setState(() {
-                    if (Validations.commonValidation(
-                        confirmPasswordController.text)) {
-                      isConfirmPasswordValid = true;
-                    } else {
-                      isConfirmPasswordValid = false;
-                    }
-                  });
-                }),
-            const SizedBox(
-              height: 7,
-            ),
-            // const Text(
-            //   'Password must be at least 6 characters',
-            //   style: TextStyle(
-            //       fontSize: 16,
-            //       color: Pallete.kWhiteColor,
-            //       fontWeight: FontWeight.bold),
-            // ),
-            const SizedBox(
-              height: 7,
-            ),
             Center(
               child: GradientButton(
-                text: 'Sign Up',
+                text: 'Log In',
                 buttonHeight: 40,
                 buttonWidth: 190,
-                action: signUp,
+                action: signIn,
               ),
             ),
             const SizedBox(

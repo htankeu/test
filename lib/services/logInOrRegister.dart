@@ -1,4 +1,4 @@
-import 'package:bookmytime/screens/chat_login.dart';
+import 'package:bookmytime/screens/logIn_screen.dart';
 import 'package:bookmytime/screens/singUp_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ void tooglePages(){
   @override
   Widget build(BuildContext context){
     if(showLoginPage){
-      return ChatLogin(onTap: tooglePages,);
+      return LogInScreen(onClick: tooglePages,);
     }
     else{
       return SingUpScreen(onClick: tooglePages);

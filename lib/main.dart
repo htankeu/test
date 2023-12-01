@@ -1,6 +1,5 @@
 import 'package:bookmytime/firebase_options.dart';
 import 'package:bookmytime/screens/getting_started_screen.dart';
-import 'package:bookmytime/services/auth_gate.dart';
 import 'package:bookmytime/services/auth_services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color.fromARGB(255, 43, 101, 189),
       ),
       debugShowCheckedModeBanner: false,
-      home: const AuthGate(),
+      home: const GettingStartedScreen(),
     );
   }
 }

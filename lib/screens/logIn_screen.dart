@@ -1,12 +1,14 @@
 import 'package:bookmytime/customs/custom_scaffold.dart';
 import 'package:bookmytime/customs/custom_text_field.dart';
 import 'package:bookmytime/customs/reusable_widgets.dart';
+import 'package:bookmytime/services/auth_services.dart';
 import 'package:bookmytime/tools/pallete.dart';
 import 'package:bookmytime/validations/validations.dart';
 import 'package:bookmytime/widgets/gradient_button.dart';
 import 'package:bookmytime/widgets/linkText.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LogInScreen extends StatefulWidget {
   final void Function()? onClick;
@@ -29,7 +31,23 @@ class _LogInScreenState extends State<LogInScreen> {
   final passwordController = TextEditingController();
 
   // function to signIn
-  void signIn() async {}
+  void signIn() async {
+    final authService = Provider.of<AuthServices>(context, listen: false);
+
+    try {
+      await authService.signInwithEmailandPassword(
+        emailController.text,
+        passwordController.text,
+      );
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +207,6 @@ class _LogInScreenState extends State<LogInScreen> {
             const SizedBox(
               height: 7,
             ),
-
             const SizedBox(
               height: 12,
             ),

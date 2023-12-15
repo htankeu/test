@@ -51,6 +51,7 @@ class _CustomCreateListingScreenState extends State<CustomCreateListingScreen> {
           endTime: endTime ?? const TimeOfDay(hour: 0, minute: 0),
           description: description,
           userId: _auth.currentUser?.uid ?? '',
+          userEmail: _auth.currentUser?.email ?? '',
         );
 
         DateTime startDateTime = DateTime(

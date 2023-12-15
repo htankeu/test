@@ -9,6 +9,7 @@ class Announcement {
   final TimeOfDay startTime;
   final TimeOfDay endTime;  
   String userId;
+  String userEmail;
 
   Announcement({
     required this.id,
@@ -19,5 +20,6 @@ class Announcement {
     required this.endTime,
     required this.description,
     required this.userId,
+    required this.userEmail,
   });
 }

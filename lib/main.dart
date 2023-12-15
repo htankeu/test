@@ -1,6 +1,7 @@
 import 'package:bookmytime/firebase_options.dart';
 import 'package:bookmytime/screens/getting_started_screen.dart';
 import 'package:bookmytime/services/auth_services.dart';
+import 'package:bookmytime/tools/pallete.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'BookMyTime',
       theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Color.fromARGB(255, 43, 101, 189),
+        scaffoldBackgroundColor: Pallete.gradient1Blue,
       ),
       debugShowCheckedModeBanner: false,
       home: const GettingStartedScreen(),

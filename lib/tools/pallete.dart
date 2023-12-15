@@ -4,9 +4,9 @@ class Pallete {
   static const Color backgroundColor = Color.fromRGBO(24, 24, 32, 1);
   static const Color senderColor = Color.fromRGBO(44, 211, 15, 1);
   static const Color receiveColor = Color.fromRGBO(190, 192, 190, 1);
-  static const Color gradient1Blue = Color.fromRGBO(18, 12, 150, 1);
-  static const Color gradient2 = Color.fromRGBO(26, 119, 233, 1);
-  static const Color gradient3 = Color.fromRGBO(255, 159, 124, 1);
+  static const Color gradient1Blue = Color.fromARGB(255, 13, 30, 60);
+  static const Color gradient2 = Color.fromRGBO(70, 172, 254, 1);
+  static const Color gradient3 = Color.fromARGB(255,30, 45, 74);
   static const Color gradient4 = Color.fromRGBO(238, 101, 51, 1);
   static const Color gradient5 = Color.fromRGBO(1, 55, 12, 1);
   static const Color borderColor = Color.fromRGBO(52, 51, 67, 1);

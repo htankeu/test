@@ -1,5 +1,5 @@
-import 'package:bookmytime/screens/logIn_screen.dart';
 import 'package:bookmytime/services/auth_gate.dart';
+import 'package:bookmytime/services/logInOrRegister.dart';
 import 'package:bookmytime/tools/pallete.dart';
 import 'package:bookmytime/widgets/gradient_button.dart';
 import 'package:bookmytime/widgets/linkText.dart';
@@ -95,7 +95,7 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LogInScreen()),
+                          builder: (context) => const LogInOrRegister(showLoginPage: true,)),
                     );
                   },
                   child: const Text(

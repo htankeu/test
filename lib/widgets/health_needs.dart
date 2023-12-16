@@ -1,3 +1,4 @@
+import 'package:bookmytime/tools/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -9,9 +10,9 @@ const HealthNeeds({ Key? key }) : super(key: key);
 
     List<CustomIcon> CustomIcons = [
       CustomIcon(icon: "assets/images/kits_medical.png", name: "Appointement"),
-      CustomIcon(icon: "assets/images/pharmacie.png", name: "Pharmacy"),
-      CustomIcon(icon: "assets/images/examine.png", name: "Examination"),
-      CustomIcon(icon: "assets/images/ambulace.png", name: "Ambulance"),
+      CustomIcon(icon: "assets/images/help.png", name: "Helping someone"),
+      CustomIcon(icon: "assets/images/asking_help.png", name: "Ask for help"),
+      CustomIcon(icon: "assets/images/others.png", name: "Other categories"),
     ];
 
     return Row(
@@ -25,7 +26,7 @@ const HealthNeeds({ Key? key }) : super(key: key);
               padding: const EdgeInsets.all(10),
               decoration:  BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.4),
+                color: Pallete.kWhiteColor,
               ),
               child: Image.asset(CustomIcons[index].icon),
             ),

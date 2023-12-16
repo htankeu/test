@@ -1,6 +1,7 @@
 import 'package:bookmytime/services/auth_services.dart';
 import 'package:bookmytime/widgets/health_needs.dart';
 import 'package:bookmytime/widgets/nearby_doctors.dart';
+import 'package:bookmytime/widgets/search_bar.dart';
 import 'package:bookmytime/widgets/upcoming_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,40 +31,32 @@ void logOut (){
         title: const Column(
           crossAxisAlignment:CrossAxisAlignment.start,
           children: [
-            Text("Hi, Joel"),
-            Text(
-              "How are you feeling today?",
-              style: TextStyle(
-                fontStyle: FontStyle.italic
-              ))
+            CustomizeSearchBar(height: 35,)
           ],
         ),
         actions: [
           IconButton(onPressed: ()=>{}, icon: const Icon(Icons.view_list)),
-          IconButton(onPressed: ()=>{}, icon: const Icon(Icons.search_outlined)),
           IconButton(onPressed: logOut, icon: const Icon(Icons.logout_rounded))
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(14),
+        padding: const EdgeInsets.only(top: 14, bottom: 14),
         children:  [
           // upcoming card
           const UpcomingCard(),
           const SizedBox(height:20),
-          Text(
-            "Health Needs",
-            style: Theme.of(context).textTheme.headlineLarge,
-          ),
-          const SizedBox(height:18),
-
+          
           // Health needs
           const HealthNeeds(),
-          const SizedBox(height:30),
-          Text(
-            "Nearby Doctors",
-            style: Theme.of(context).textTheme.headlineLarge,
+          const SizedBox(height:21),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Nearby Doctors",
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
           ),
-          const SizedBox(height: 15,),
+          const SizedBox(height: 11,),
 
           // Nearby Doctors
           const NearbyDoctors()

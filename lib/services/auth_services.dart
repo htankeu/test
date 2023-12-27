@@ -28,7 +28,7 @@ class AuthServices extends ChangeNotifier {
   }
 
   // create a new User
-  Future<UserCredential> signUpWithEmailandPassword(
+  Future<UserCredential> signUpWithEmailandPassword(String userName,
       String email, String password) async {
     try {
       UserCredential userCredential = await _firebaseAuth
@@ -37,7 +37,8 @@ class AuthServices extends ChangeNotifier {
       // after creating the user, create a new document for the user in the users collection
       _firestore.collection('users').doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
-        'email': userCredential.user!.email
+        'email': userCredential.user!.email,
+        'username': userName
       });
 
       return userCredential;

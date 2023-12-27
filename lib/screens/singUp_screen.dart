@@ -50,7 +50,7 @@ class _registerPageState extends State<SingUpScreen> {
     final authService = Provider.of<AuthServices>(context, listen: false);
 
     try {
-      await authService.signUpWithEmailandPassword(
+      await authService.signUpWithEmailandPassword(usernameController.text,
           emailController.text, passwordController.text);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

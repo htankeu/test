@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Announcement {
@@ -22,4 +23,15 @@ class Announcement {
     required this.userId,
     required this.userEmail,
   });
+
+  Announcement.fromSnapshot(QueryDocumentSnapshot<Map<String,dynamic>> snapshot)
+      :id = snapshot.id,
+      title = snapshot['title'],
+      location = snapshot['location'],
+      date = snapshot['date'],
+      startTime = snapshot['startTime'],
+      endTime = snapshot['endTime'],
+      description = snapshot['description'],
+      userId = snapshot['userId'],
+      userEmail = snapshot['userEmail'];
 }

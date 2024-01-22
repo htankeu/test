@@ -25,4 +25,5 @@ class Pallete {
   static const kTertiaryColor = Color(0xff1b1b1b);
   static const kTextFieldBorderColor = Color(0xff6e6e6e);
   static const kTextFieldBgColor = Color(0xff2e2e2e);
+  static  var greyColor = Colors.grey.withOpacity(0.5);
 }

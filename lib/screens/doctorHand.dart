@@ -1,3 +1,4 @@
+import 'package:bookmytime/screens/announcement_screen.dart';
 import 'package:bookmytime/services/auth_services.dart';
 import 'package:bookmytime/widgets/health_needs.dart';
 import 'package:bookmytime/widgets/nearby_doctors.dart';
@@ -57,9 +58,20 @@ void logOut (){
             ),
           ),
           const SizedBox(height: 11,),
-
           // Nearby Doctors
-          const NearbyDoctors()
+          const NearbyDoctors(),
+          const SizedBox(height:21),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Announcements",
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+          ),
+          const SizedBox(height: 9,),
+          // Announcements
+          const AnnouncementScreen(),
+          const SizedBox(height: 2,)
         ],
       ),
       

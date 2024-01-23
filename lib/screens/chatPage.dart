@@ -51,7 +51,9 @@ class _ChatPageState extends State<ChatPage> {
             // user input,
             _buildMessageInput(),
 
-            const SizedBox(height: 25,)
+            const SizedBox(
+              height: 25,
+            )
           ],
         ),
       ),
@@ -66,10 +68,14 @@ class _ChatPageState extends State<ChatPage> {
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Text('Error ${snapshot.error}');
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text("Loading....");
+        } else if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return const Center(
+            child: Text("You can chat with any other users"),
+          );
         }
 
         return ListView(
@@ -135,7 +141,7 @@ class _ChatPageState extends State<ChatPage> {
               textController: _messageController,
             ),
           ),
-      
+
           // send button
           IconButton(
             onPressed: sendMessage,

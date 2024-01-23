@@ -8,9 +8,9 @@ class AnnouncementService extends ChangeNotifier {
 
 
   // GET ANNOUNCEMENT
-  Future<Iterable<Map<String, dynamic>>>getAnnouncement() async {
-    var snapshot = await _firestore.collection('announcement').get();
+  Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>>getAnnouncement() {
+    var snapshot = _firestore.collection('announcements').get();
 
-    return snapshot.docs.map((doc) => doc.data());
+    return snapshot.then((value) => value.docs);
   }
 }

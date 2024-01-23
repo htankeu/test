@@ -1,5 +1,6 @@
 import 'package:bookmytime/services/announcement/announcement_service.dart';
 import 'package:bookmytime/widgets/announce_card.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AnnouncementScreen extends StatefulWidget {
@@ -14,14 +15,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("The available activities in moment"),
-      ),
-      body: Column(
-        children: [_buildAnnouceList()],
-      ),
-    );
+    return _buildAnnouceList();
   }
 
   Widget _buildAnnouceList() {
@@ -30,20 +24,40 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text('Error ${snapshot.error}');
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(
+              child: Text("Any data are available"),
+            );
+          } else {
+            return _buildAnnounceElement(snapshot);
           }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text("Loading....");
-          }
-
-          return GridView.count(
-            crossAxisCount: 2,
-            children: [_buildAnnounceItem(snapshot.data!)],
-          );
         });
   }
 
-  Widget _buildAnnounceItem(Iterable<Map<String, dynamic>> data) {
-    Map<String, dynamic> dataUsed = data as Map<String, dynamic>;
+  Widget _buildAnnounceElement(
+      AsyncSnapshot<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
+          snapshot) {
+    if (snapshot.hasData && !snapshot.hasError) {
+      // Accessing the list of snapshots
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> snapshotList =
+          snapshot.data!;
+
+      // Iterating through the list
+      return GridView.count(
+        crossAxisCount: 2,
+        children: snapshotList.map((doc) => _buildAnnounceItem(doc)).toList(),
+      );
+    } else {
+      return Text('Error : ${snapshot.error}');
+    }
+  }
+
+  Widget _buildAnnounceItem(QueryDocumentSnapshot<Map<String, dynamic>> data) {
+    Map<String, dynamic> dataUsed = data.data();
     String location = dataUsed['location'];
     String description = dataUsed['title'];
 

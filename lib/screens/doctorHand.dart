@@ -54,7 +54,7 @@ void logOut (){
             padding: const EdgeInsets.all(8.0),
             child: Text(
               "Nearby Doctors",
-              style: Theme.of(context).textTheme.headlineLarge,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
           const SizedBox(height: 11,),
@@ -65,7 +65,7 @@ void logOut (){
             padding: const EdgeInsets.all(8.0),
             child: Text(
               "Announcements",
-              style: Theme.of(context).textTheme.headlineLarge,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
           const SizedBox(height: 9,),

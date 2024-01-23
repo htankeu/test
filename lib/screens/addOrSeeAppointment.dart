@@ -1,4 +1,3 @@
-import 'package:clean_calendar/clean_calendar.dart';
 import 'package:flutter/material.dart';
 
 class AddOrSeeAppointment extends StatefulWidget {
@@ -25,9 +24,6 @@ class _AddOrSeeAppointmentState extends State<AddOrSeeAppointment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Your Appointments'),elevation: 2,),
-      body: CleanCalendar(
-        currentDateOfCalendar: today,
-      ),
       
     );
   }

@@ -47,7 +47,9 @@ dependencies:
   searchbar_animation: ^0.0.4
   flutter_staggered_animations: ^1.1.1
   flutter_carousel_widget: ^2.2.0
-
+  kalender: ^0.2.2
+  syncfusion_flutter_calendar: ^24.1.47
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

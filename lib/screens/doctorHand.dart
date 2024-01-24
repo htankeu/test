@@ -70,7 +70,7 @@ void logOut (){
           ),
           const SizedBox(height: 9,),
           // Announcements
-          const AnnouncementScreen(),
+          // const AnnouncementScreen(),
           const SizedBox(height: 2,)
         ],
       ),

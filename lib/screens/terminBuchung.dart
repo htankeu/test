@@ -43,7 +43,7 @@ class _TerminBuchungState extends State<TerminBuchung> {
           onTap: (CalendarTapDetails details) {
             // if the clicked element is an cell in the calendar
             if (details.targetElement == CalendarElement.calendarCell) {
-              if (!details.appointments!.isEmpty) {
+              if (details.appointments!.isEmpty) {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) =>
                         DayViewScreen(selectedDate: details.date!)));
@@ -51,10 +51,10 @@ class _TerminBuchungState extends State<TerminBuchung> {
                 List<Appointment> appointments =
                     details.appointments!.map((dynamic item) {
                   return Appointment(
-                      startTime: item['startTime'],
-                      endTime: item['endTime'],
-                      subject: item['subject'],
-                      color: item['color']);
+                      startTime: item.startTime,
+                      endTime: item.endTime,
+                      subject: item.subject,
+                      color: item.color);
                 }).toList();
                 // change the view
                 Navigator.of(context).push(MaterialPageRoute(

@@ -20,7 +20,7 @@ class _DayViewScreenState extends State<DayViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.selectedDate}"),
+        title: Text("Events on ${widget.selectedDate.day}/${widget.selectedDate.month}/${widget.selectedDate.year}"),
       ),
       body: SfCalendar(
         view: CalendarView.day,

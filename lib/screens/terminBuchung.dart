@@ -1,4 +1,5 @@
 import 'package:bookmytime/customs/customCalendarDataSource.dart';
+import 'package:bookmytime/screens/dayViewScreen.dart';
 import 'package:bookmytime/tools/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -19,11 +20,10 @@ class _TerminBuchungState extends State<TerminBuchung> {
     final DateTime endTime = startTime.add(const Duration(hours: 2));
 
     events.add(Appointment(
-      startTime: startTime,
-      endTime: endTime,
-      subject: "Test",
-      color: Pallete.goldColor
-    ));
+        startTime: startTime,
+        endTime: endTime,
+        subject: "Test",
+        color: Pallete.goldColor));
 
     return events;
   }
@@ -40,6 +40,29 @@ class _TerminBuchungState extends State<TerminBuchung> {
         body: SfCalendar(
           view: CalendarView.month,
           dataSource: CustomCalendarDataSource(getAppointments()),
+          onTap: (CalendarTapDetails details) {
+            // if the clicked element is an cell in the calendar
+            if (details.targetElement == CalendarElement.calendarCell) {
+              if (!details.appointments!.isEmpty) {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        DayViewScreen(selectedDate: details.date!)));
+              } else {
+                List<Appointment> appointments =
+                    details.appointments!.map((dynamic item) {
+                  return Appointment(
+                      startTime: item['startTime'],
+                      endTime: item['endTime'],
+                      subject: item['subject'],
+                      color: item['color']);
+                }).toList();
+                // change the view
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => DayViewScreen(
+                        selectedDate: details.date!, dayEvents: appointments)));
+              }
+            }
+          },
         ));
   }
 }
